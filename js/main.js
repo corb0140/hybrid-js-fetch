@@ -1,5 +1,5 @@
 const APP = {
-  imageContainer: document.getElementById("images"),
+  imagesGrid: document.getElementById("images"),
   search: document.getElementById("search"),
   searchForm: document.getElementById("searchForm"),
   url: "https://api.pexels.com/v1/",
@@ -37,7 +37,7 @@ const APP = {
       })
       .then((data) => {
         console.log(data);
-        APP.imageContainer.innerHTML = "";
+        APP.imagesGrid.innerHTML = "";
 
         let imageList = new DocumentFragment();
 
@@ -63,7 +63,7 @@ const APP = {
 
               imageList.appendChild(div);
 
-              APP.imageContainer.appendChild(imageList);
+              APP.imagesGrid.appendChild(imageList);
 
               APP.search.value = "";
               dialog.style.display = "none";
