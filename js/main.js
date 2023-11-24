@@ -5,7 +5,7 @@ const APP = {
   url: "https://api.pexels.com/v1/",
   options: {
     headers: {
-      Authorization: "YOUR_API_KEY_HERE",
+      Authorization: "PLACE_YOUR_API_KEY_HERE",
     },
   },
 
@@ -14,31 +14,30 @@ const APP = {
       ev.preventDefault();
 
       APP.fetchData();
-
-      APP.imageContainer.innerHTML = "";
     });
   },
 
   fetchData: function () {
     const apiUrl = `${
       APP.url
-    }search?query=${APP.search.value.trim()}&per_page=1&page=1`;
+    }search?query=${APP.search.value.trim()}&per_page=5&page=1`;
 
     if (APP.search.value === "") {
-      APP.errorHandler("field must not be empty");
+      APP.errorHandler("Search field must not be empty");
       return;
     }
 
     fetch(apiUrl, APP.options)
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network Error Occurred");
+          throw new Error(`Network Error Occurred ${response.status}`);
         }
 
         return response.json();
       })
       .then((data) => {
         console.log(data);
+        APP.imageContainer.innerHTML = "";
 
         let imageList = new DocumentFragment();
 
@@ -46,7 +45,7 @@ const APP = {
           fetch(imageUrl.src.original)
             .then((response) => {
               if (!response.ok) {
-                throw new Error("error");
+                throw new Error("Failed to fetch image");
               }
 
               return response.blob();
@@ -67,19 +66,24 @@ const APP = {
               APP.imageContainer.appendChild(imageList);
 
               APP.search.value = "";
+              dialog.style.display = "none";
             })
-            .catch((err) => {
-              APP.errorHandler(err);
+            .catch((error) => {
+              APP.errorHandler(error);
             });
         });
       })
       .catch((error) => {
+        console.error("hello");
         APP.errorHandler(error);
       });
   },
 
   errorHandler: function (err) {
-    APP.imageContainer.innerHTML = `<h3>${err}</h3>`;
+    console.log(err);
+    const dialog = document.getElementById("dialog");
+    dialog.style.display = "flex";
+    dialog.innerHTML = `<h3>${err}</h3>`;
   },
 };
 

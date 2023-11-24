@@ -218,6 +218,29 @@ header h1 {
 .image__container {
   list-style-type: none;
   margin: 1.5rem 0;
+
+  display: flex;
+  aspect-ratio: 6 / 4;
+}
+
+.image__container img {
+  width: 100%;
+  object-fit: cover;
+}
+
+/* --------- DIALOG --------- */
+
+#dialog {
+  border: 0.25rem solid var(--secondary-color);
+  margin: 2.5rem 0;
+  padding: 2rem 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+#dialog h3 {
+  margin: 0;
 }
 
 @media only screen and (min-width: 45em) {
