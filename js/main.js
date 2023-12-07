@@ -5,7 +5,7 @@ const APP = {
   url: "https://api.pexels.com/v1/",
   options: {
     headers: {
-      Authorization: "PLACE_YOUR_API_KEY_HERE",
+      Authorization: "cQHSkKnhM10XDNtDGnktlXUm0Xr9Mxw7b7RzoXAIXyv5Kkyfgi0hPvQD",
     },
   },
 
